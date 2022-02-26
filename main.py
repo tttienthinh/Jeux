@@ -27,7 +27,7 @@ def recursive(i, mot, liste):
 
 def entropie(freq, n):
     L = np.array(freq) / n
-    return -(L * np.log(np.clip(L, 0.00_1/n, 1))).sum() / np.log(2)
+    return -(L * np.log(np.clip(L, 0.00_1/max(n, 1), 1))).sum() / np.log(2)
 
 def nouvelle_tab(i, couleurs, mot, liste):
     if i==5:
