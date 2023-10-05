@@ -31,28 +31,31 @@ def main(name):
 		if vel <= 1:
 			vel = 1
 
-		# get key presses
-		keys = pygame.key.get_pressed()
+
+
+		# get mouse position
+		mouse_pos = pygame.mouse.get_pos()
 		
-		# movement based on key presses
-		if keys[pygame.K_LEFT] or keys[pygame.K_q]:
+		print(mouse_pos[0] - my_player["x"], mouse_pos[1] - my_player["y"])
+		#movement based on mouse position
+		if mouse_pos[0] - my_player["x"] < 0:
 			if my_player["x"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
 				my_player["x"] = my_player["x"] - vel
 
-		if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+		if mouse_pos[0] - my_player["x"] > 0:
 			if my_player["x"] + vel + PLAYER_RADIUS + my_player["score"] <= W:
 				my_player["x"] = my_player["x"] + vel
 
-		if keys[pygame.K_UP] or keys[pygame.K_z]:
+		if mouse_pos[1] - my_player["y"] < 0:
 			if my_player["y"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
 				my_player["y"] = my_player["y"] - vel
 
-		if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+		if mouse_pos[1] - my_player["y"] > 0:
 			if my_player["y"] + vel + PLAYER_RADIUS + my_player["score"] <= H:
 				my_player["y"] = my_player["y"] + vel
-
+		
+		
 		data = "move " + str(my_player["x"]) + " " + str(my_player["y"])
-
 		# send data to server and recieve back all players information
 		balls, players, game_time = server.send(data)
 
