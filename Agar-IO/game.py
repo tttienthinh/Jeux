@@ -35,7 +35,7 @@ def main(name):
 
 		# get mouse position
 		mouse_pos = pygame.mouse.get_pos()
-		
+		"""
 		print(mouse_pos[0] - my_player["x"], mouse_pos[1] - my_player["y"])
 		#movement based on mouse position
 		if mouse_pos[0] - my_player["x"] < 0:
@@ -53,6 +53,37 @@ def main(name):
 		if mouse_pos[1] - my_player["y"] > 0:
 			if my_player["y"] + vel + PLAYER_RADIUS + my_player["score"] <= H:
 				my_player["y"] = my_player["y"] + vel
+		"""
+		print(mouse_pos[0] - W/2, mouse_pos[1] - H/2)
+		#movement based on mouse position
+		"""
+		if mouse_pos[0] - my_player["x"] < 0:
+			if my_player["x"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
+				my_player["x"] = my_player["x"] - vel
+
+		if mouse_pos[0] - W/2 > 0:
+			if my_player["x"] + vel + PLAYER_RADIUS + my_player["score"] <= W:
+				my_player["x"] = my_player["x"] + vel
+
+		if mouse_pos[1] - H/2 < 0:
+			if my_player["y"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
+				my_player["y"] = my_player["y"] - vel
+
+		if mouse_pos[1] - H/2 > 0:
+			if my_player["y"] + vel + PLAYER_RADIUS + my_player["score"] <= H:
+				my_player["y"] = my_player["y"] + vel
+		"""
+		
+		dx = mouse_pos[0] - W/2
+		dy = mouse_pos[1] - H/2
+
+		def inside_map(val, maxi):
+			val = max(0, val)
+			val = min(maxi, val)
+			return val
+
+		my_player["x"] = inside_map(my_player["x"] + int(vel*dx / (dx**2 + dy**2)**0.5), W)
+		my_player["y"] = inside_map(my_player["y"] + int(vel*dy / (dx**2 + dy**2)**0.5), H)
 		
 		
 		data = "move " + str(my_player["x"]) + " " + str(my_player["y"])
@@ -84,7 +115,7 @@ def main(name):
 # name = get_name()
 name = "TT"
 name = "01234567890123456789"
-name = "0123456789012345678"
+name = "01234567"
 
 # make window start in top left hand corner
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0,30)
