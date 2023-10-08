@@ -26,7 +26,7 @@ ROUND_TIME = 60 * 5
 
 MASS_LOSS_TIME = 7
 
-W, H = 1600*3, 1600*3
+W, H = 1600*2, 1600*2
 
 
 # try to connect to server
