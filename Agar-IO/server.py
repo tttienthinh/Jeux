@@ -184,7 +184,7 @@ def threaded_client(conn, _id):
 	print("[LOG]", name, "connected to the server.")
 
 	# Setup properties for each new player
-	color = colors[current_id]
+	color = colors[current_id%len(colors)]
 	x, y = get_start_location(players)
 	players[current_id] = {"x":x, "y":y,"color":color,"score":0,"name":name}  # x, y color, score, name
 
