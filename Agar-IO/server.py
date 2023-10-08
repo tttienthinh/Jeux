@@ -28,21 +28,22 @@ MASS_LOSS_TIME = 7
 
 W, H = 1600, 830
 
-HOST_NAME = socket.gethostname()
-SERVER_IP = socket.gethostbyname(HOST_NAME)
 
 # try to connect to server
 try:
+	"""
+	HOST_NAME = socket.gethostname()
+	SERVER_IP = socket.gethostbyname(HOST_NAME)
     S.bind((SERVER_IP, PORT))
-	#S.bind(('', 5555))
+	print(f"[SERVER] Server Started with local ip {SERVER_IP}")
+	"""
+	S.bind(('', 5555))
 except socket.error as e:
     print(str(e))
     print("[SERVER] Server could not start")
     quit()
 
 S.listen()  # listen for connections
-
-print(f"[SERVER] Server Started with local ip {SERVER_IP}")
 
 # dynamic variables
 players = {}
