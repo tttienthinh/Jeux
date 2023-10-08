@@ -250,8 +250,8 @@ def threaded_client(conn, _id):
 					player_collision(players)
 
 				# if the amount of balls is less than 150 create more
-				if len(balls) < 1500:
-					create_balls(balls, random.randrange(1000,1500))
+				if len(balls) < 150:
+					create_balls(balls, random.randrange(100,150))
 					print("[GAME] Generating more orbs")
 
 				send_data = pickle.dumps((balls,players, game_time))
@@ -285,7 +285,7 @@ def threaded_client(conn, _id):
 # MAINLOOP
 
 # setup level with balls
-create_balls(balls, random.randrange(2000,2500))
+create_balls(balls, random.randrange(200,250))
 
 print("[GAME] Setting up level")
 print("[SERVER] Waiting for connections")
