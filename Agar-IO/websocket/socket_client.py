@@ -7,7 +7,7 @@ port = 15555
 hote = "wss://demo-websocket.tuxae.fr"
 port = 443
 hote = "demo-websocket.tuxae.fr"
-port = 80
+port = 443
 #  80 et 443
 socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 socket.connect((hote, port))
