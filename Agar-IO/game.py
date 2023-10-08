@@ -35,60 +35,30 @@ def main(name):
 
 		# get mouse position
 		mouse_pos = pygame.mouse.get_pos()
-		"""
-		print(mouse_pos[0] - my_player["x"], mouse_pos[1] - my_player["y"])
 		#movement based on mouse position
-		if mouse_pos[0] - my_player["x"] < 0:
-			if my_player["x"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
-				my_player["x"] = my_player["x"] - vel
-
-		if mouse_pos[0] - my_player["x"] > 0:
-			if my_player["x"] + vel + PLAYER_RADIUS + my_player["score"] <= W:
-				my_player["x"] = my_player["x"] + vel
-
-		if mouse_pos[1] - my_player["y"] < 0:
-			if my_player["y"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
-				my_player["y"] = my_player["y"] - vel
-
-		if mouse_pos[1] - my_player["y"] > 0:
-			if my_player["y"] + vel + PLAYER_RADIUS + my_player["score"] <= H:
-				my_player["y"] = my_player["y"] + vel
-		"""
-		print(mouse_pos[0] - W/2, mouse_pos[1] - H/2)
-		#movement based on mouse position
-		"""
-		if mouse_pos[0] - my_player["x"] < 0:
-			if my_player["x"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
-				my_player["x"] = my_player["x"] - vel
-
-		if mouse_pos[0] - W/2 > 0:
-			if my_player["x"] + vel + PLAYER_RADIUS + my_player["score"] <= W:
-				my_player["x"] = my_player["x"] + vel
-
-		if mouse_pos[1] - H/2 < 0:
-			if my_player["y"] - vel - PLAYER_RADIUS - my_player["score"] >= 0:
-				my_player["y"] = my_player["y"] - vel
-
-		if mouse_pos[1] - H/2 > 0:
-			if my_player["y"] + vel + PLAYER_RADIUS + my_player["score"] <= H:
-				my_player["y"] = my_player["y"] + vel
-		"""
-		
+		def get_norm(dx, dy):
+			return max(1, (dx**2 + dy**2)**0.5)
 		dx = mouse_pos[0] - W/2
 		dy = mouse_pos[1] - H/2
+		norme = get_norm(dx, dy)
 
 		def inside_map(val, maxi):
 			val = max(0, val)
 			val = min(maxi, val)
 			return val
 
-		my_player["x"] = inside_map(my_player["x"] + int(vel*dx / (dx**2 + dy**2)**0.5), W)
-		my_player["y"] = inside_map(my_player["y"] + int(vel*dy / (dx**2 + dy**2)**0.5), H)
+		my_player["x"] = inside_map(my_player["x"] + int(vel*dx / norme), W)
+		my_player["y"] = inside_map(my_player["y"] + int(vel*dy / norme), H)
 		
 		
 		data = "move " + str(my_player["x"]) + " " + str(my_player["y"])
 		# send data to server and recieve back all players information
-		balls, players, game_time = server.send(data)
+		returning_values = server.send(data)
+		try:
+			if returning_values is not None:
+				balls, players, game_time = returning_values
+		except:
+			print(returning_values)
 
 		for event in pygame.event.get():
 			# if user hits red x button close window
