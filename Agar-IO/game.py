@@ -27,31 +27,13 @@ def main(name):
 	while run:
 		clock.tick(30) # 30 fps max
 		my_player = players[my_id]
-		vel = START_VEL - round(my_player["score"]/14)
-		if vel <= 1:
-			vel = 1
-
-
-
 		# get mouse position
 		mouse_pos = pygame.mouse.get_pos()
 		#movement based on mouse position
-		def get_norm(dx, dy):
-			return max(1, (dx**2 + dy**2)**0.5)
 		dx = mouse_pos[0] - W/2
 		dy = mouse_pos[1] - H/2
-		norme = get_norm(dx, dy)
-
-		def inside_map(val, maxi):
-			val = max(0, val)
-			val = min(maxi, val)
-			return val
-
-		my_player["x"] = inside_map(my_player["x"] + int(vel*dx / norme), W)
-		my_player["y"] = inside_map(my_player["y"] + int(vel*dy / norme), H)
+		data = f"move " + str(dx) + " " + str(dy)
 		
-		
-		data = "move " + str(my_player["x"]) + " " + str(my_player["y"])
 		# send data to server and recieve back all players information
 		returning_values = server.send(data)
 		try:
@@ -91,7 +73,7 @@ name = "01234567"
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0,30)
 
 # setup pygame window
-WIN = pygame.display.set_mode((W,H))
+WIN = pygame.display.set_mode((W,H), pygame.FULLSCREEN)
 pygame.display.set_caption("Blobs")
 
 # start game

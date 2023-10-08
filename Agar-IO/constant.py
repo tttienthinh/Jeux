@@ -2,7 +2,6 @@ import pygame
 
 # Constants
 PLAYER_RADIUS = 10
-START_VEL = 9
 BALL_RADIUS = 5
 
 W, H = 1600, 830

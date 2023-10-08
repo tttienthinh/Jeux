@@ -20,6 +20,7 @@ PORT = 5555
 
 BALL_RADIUS = 5
 START_RADIUS = 7
+START_VEL = 9
 
 ROUND_TIME = 60 * 5
 
@@ -198,6 +199,14 @@ def threaded_client(conn, _id):
 	get
 	id - returns id of client
 	'''
+	def inside_map(val, maxi):
+			val = max(0, val)
+			val = min(maxi, val)
+			return val
+
+	def get_norm(dx, dy):
+		return max(1, (dx**2 + dy**2)**0.5)
+	
 	while True:
 
 		if start:
@@ -223,10 +232,16 @@ def threaded_client(conn, _id):
 			# look for specific commands from recieved data
 			if data.split(" ")[0] == "move":
 				split_data = data.split(" ")
-				x = int(split_data[1])
-				y = int(split_data[2])
-				players[current_id]["x"] = x
-				players[current_id]["y"] = y
+				dx = int(split_data[1])
+				dy = int(split_data[2])
+
+				
+				norme = get_norm(dx, dy)
+				vel = START_VEL - players[current_id]["score"]/30
+				if vel <= 3:
+					vel = 3
+				players[current_id]["x"] = inside_map(players[current_id]["x"] + int(vel*dx / norme), W)
+				players[current_id]["y"] = inside_map(players[current_id]["y"] + int(vel*dy / norme), H)
 
 				# only check for collison if the game has started
 				if start:
