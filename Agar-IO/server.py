@@ -28,13 +28,13 @@ MASS_LOSS_TIME = 7
 
 W, H = 1600, 830
 
-"""HOST_NAME = socket.gethostname()
+HOST_NAME = socket.gethostname()
 SERVER_IP = socket.gethostbyname(HOST_NAME)
-"""
+
 # try to connect to server
 try:
-    #S.bind((SERVER_IP, PORT))
-	S.bind(('', 5555))
+    S.bind((SERVER_IP, PORT))
+	#S.bind(('', 5555))
 except socket.error as e:
     print(str(e))
     print("[SERVER] Server could not start")
@@ -42,7 +42,7 @@ except socket.error as e:
 
 S.listen()  # listen for connections
 
-#print(f"[SERVER] Server Started with local ip {SERVER_IP}")
+print(f"[SERVER] Server Started with local ip {SERVER_IP}")
 
 # dynamic variables
 players = {}
@@ -232,8 +232,8 @@ def threaded_client(conn, _id):
 			# look for specific commands from recieved data
 			if data.split(" ")[0] == "move":
 				split_data = data.split(" ")
-				dx = int(split_data[1])
-				dy = int(split_data[2])
+				dx = float(split_data[1])
+				dy = float(split_data[2])
 
 				
 				norme = get_norm(dx, dy)

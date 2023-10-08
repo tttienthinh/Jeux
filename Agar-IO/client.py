@@ -11,7 +11,8 @@ class Network:
     def __init__(self):
         self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #self.client.settimeout(10.0)
-        self.host = "172.233.247.228"
+        #self.host = "172.233.247.228"
+        self.host = "10.192.64.50"
         self.port = 5555
         self.addr = (self.host, self.port)
 
