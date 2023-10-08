@@ -1,6 +1,5 @@
 import pygame
 from client import Network
-import random
 import os
 
 from function import *
@@ -64,10 +63,7 @@ def main(name):
 	quit()
 
 # get users name
-# name = get_name()
-name = "TT"
-name = "01234567890123456789"
-name = "01234567"
+name = get_name()
 
 # make window start in top left hand corner
 os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0,30)

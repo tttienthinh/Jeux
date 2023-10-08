@@ -38,7 +38,9 @@ def redraw_window(my_player, players, balls, game_time,
 				  NAME_FONT, TIME_FONT, SCORE_FONT, W, H):
 	
 	WIN.fill((255,255,255)) # fill screen white, to clear old frames
-	
+	# draw limit
+	pygame.draw.rect(WIN, (251, 244, 226), get_rel_pos(my_player, W, H, 0, 0)+(1600*2, 1600*2), 1000)  # Border
+
     # draw all the orbs/balls
 	for ball in balls:
 		pygame.draw.circle(WIN, ball[2], get_rel_pos(my_player, W, H, ball[0], ball[1]), BALL_RADIUS)
@@ -48,7 +50,7 @@ def redraw_window(my_player, players, balls, game_time,
 		p = players[player]
 		pygame.draw.circle(WIN, p["color"], get_rel_pos(my_player, W, H, p["x"], p["y"]), PLAYER_RADIUS + round(p["score"]))
 		# render and draw name for each player
-		text = NAME_FONT.render(p["name"], 1, (0,0,0))
+		text = NAME_FONT.render(p["name"], 1, (200, 200, 200))
 		WIN.blit(text, get_rel_pos(my_player, W, H, p["x"]-text.get_width()/2, p["y"]-text.get_height()/2))
 
 	# draw scoreboard
