@@ -60,7 +60,7 @@ def redraw_window(my_player, players, balls, game_time,
 	top10 = min(len(players), 10)
 	for count, i in enumerate(sort_players[:top10]):
 		text = SCORE_FONT.render(str(count+1) + ". " + str(players[i]["name"]), 1, (0,0,0))
-		WIN.blit(text, (x, 35 + count * 20))
+		WIN.blit(text, (x, 35 + count * 25))
 
 	# draw time
 	text = TIME_FONT.render("Time: " + convert_time(game_time), 1, (0,0,0))
