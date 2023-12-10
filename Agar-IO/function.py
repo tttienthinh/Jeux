@@ -39,7 +39,7 @@ def redraw_window(my_player, players, balls, game_time,
 	
 	WIN.fill((255,255,255)) # fill screen white, to clear old frames
 	# draw limit
-	pygame.draw.rect(WIN, (251, 244, 226), get_rel_pos(my_player, W, H, 0, 0)+(1600*2, 1600*2), 1000)  # Border
+	pygame.draw.rect(WIN, (251, 244, 226), get_rel_pos(my_player, W, H, 0, 0)+(1600, 1600), 1000)  # Border
 
     # draw all the orbs/balls
 	for ball in balls:
